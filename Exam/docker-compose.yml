@@ -1,0 +1,34 @@
+version: '3.11'
+
+
+services:
+  bot:
+    image: abdulaziz/exam_5
+    restart: always
+    container_name: exam_con
+    environment:
+      TOKEN: 7481876613:AAF0mOGoun2dPHXBRp3oaat6sCKwdsWrfmk
+      DB_USER: postgres
+      DB_NAME: postgres
+      DB_HOST: pg
+      DB_PORT: 5432
+      DB_PASSWORD: 1
+
+    depends_on:
+      - pg
+
+
+  pg:
+    image: postgres:alpine
+    restart: always
+    container_name: pg_con
+    environment:
+      POSTGRES_PASSWORD: 1
+      TZ: Asia/Tashkent
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+
+volumes:
+  pg_data:
